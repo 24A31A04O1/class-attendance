@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:400px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:40px 25px;
+    text-align:center;
+    color:white;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+.card h2{
+    margin-bottom:25px;
+    font-size:22px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    margin-top:15px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.green{
+    background:#00ff99;
+    color:black;
+}
+
+.blue{
+    background:white;
+    color:#764ba2;
+}
+
+.red{
+    background:#ff4d4d;
+    color:white;
+}
+
+.status{
+    margin-top:15px;
+    font-size:15px;
+    font-weight:bold;
+}
+
+@media (max-width:480px){
+    .card{
+        padding:30px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Welcome, {{ name }}</h2>
+
+    {% if not marked_today %}
+        <button class="green" onclick="markAttendance()">
+            📍 Mark Today Attendance
+        </button>
+    {% else %}
+        <div class="status" style="color:#00ff99;">
+            ✅ Today Attendance Marked
+        </div>
+    {% endif %}
+
+    <button class="blue" onclick="window.location.href='/history'">
+        📅 View Past Attendance
+    </button>
+
+    <!-- 🔴 Logout Button -->
+    <button class="red" onclick="window.location.href='/logout'">
+        🚪 Logout
+    </button>
+
+</div>
+
+<script>
+function markAttendance() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+        fetch("/mark", {
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded"},
+            body:`latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.status==="success"){
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        });
+
+    }, function(){
+        alert("Location permission required!");
+    });
+}
+</script>
+
+</body>
+</html>
