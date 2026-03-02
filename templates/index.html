@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Class Attendance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            width: 380px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .glass-container h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .glass-container p {
+            font-size: 14px;
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .btn-login {
+            background: white;
+            color: #764ba2;
+        }
+
+        .btn-login:hover {
+            background: #f1f1f1;
+            transform: scale(1.05);
+        }
+
+        .btn-register {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background: white;
+            color: #764ba2;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="glass-container">
+        <h1>📘 Smart Class Attendance</h1>
+        <p>Mark your daily presence easily & securely</p>
+
+        <a href="/login" class="btn btn-login">Login</a>
+        <a href="/register" class="btn btn-register">Register</a>
+
+        <div class="footer">
+            Developed for Class Management System
+        </div>
+    </div>
+
+</body>
+</html>
